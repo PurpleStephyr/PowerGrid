@@ -1,1 +1,3 @@
-Committing with proxy (test 2)
+Testing commit :)
+test commit 2
+NO TRAILING WHITESPACE!
