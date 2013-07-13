@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 # MockGameMaster.py
 # This file is a part of PowerGrid
 # Copyright 2013 Steph Kraemer, Nikolai Semenenko
@@ -17,26 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with PowerGrid.  If not, see <http://www.gnu.org/licenses/>.
 
-import random
-import sys
-sys.path.append('../..')
-
 from src.server.ProcessHandler import *
 
-if __name__ == '__main__':
-    processHandler = ProcessHandler('./SillyBot.py')
-    randomFunctions = [processHandler.requestAuctionStart,
-                       processHandler.requestBid,
-                       processHandler.requestMaterialPurchase,
-                       processHandler.requestCityPurchase,
-                       processHandler.requestSupplyPowerForCities]
-    random.seed()
-    for i in range(100):
-        function = randomFunctions[random.randint(0,len(randomFunctions)-1)]
-        if function == processHandler.requestBid:
-            minBid = random.randint(0, 9001)
-            powerPlant = random.randint(0,1337)
-            player = random.randint(0, 5)
-            print("Response: " + str(function(minBid, powerPlant, player)))
-        else:
-            print("Response: " + str(function()))
+class MockGameMaster:
+    pass
