@@ -1,4 +1,4 @@
-# ServerRequestTypes.py
+# File ServerRequestTypes.py
 # This file is a part of PowerGrid
 # Copyright 2013 Steph Kraemer, Nikolai Semenenko
 

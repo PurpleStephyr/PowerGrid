@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 # File SillyBot.py
 # This file is a part of PowerGrid
 # Copyright 2013 Steph Kraemer, Nikolai Semenenko
@@ -16,5 +14,5 @@
 
 # You should have received a copy of the GNU General Public License
 # along with PowerGrid.  If not, see <http://www.gnu.org/licenses/>.
-while(True):
-    pass
+
+
