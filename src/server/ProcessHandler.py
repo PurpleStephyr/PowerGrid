@@ -16,6 +16,7 @@
 # along with PowerGrid.  If not, see <http://www.gnu.org/licenses/>.
 
 import subprocess
+import threading
 from copy import *
 
 from src.server.ClientInputHandler import *
@@ -40,12 +41,12 @@ class ProcessHandler:
     def __generateRequest(self, requestType, args=None):
         self.requestCount += 1
         requestText = str(requestType)
-        self.requests[requestCount] = requestType
+        self.requests[self.requestCount] = requestType
         if args != None:
             for arg in args:
                 requestText += '\n' + arg
         self.__condition.acquire()
-        self.client.write('REQUEST\n' + str(requestCount) + '\n' + requestText + '\nEND\n')
+        self.client.stdin.write(bytes('REQUEST\n' + str(self.requestCount) + '\n' + requestText + '\nEND\n', 'UTF-8'))
         self.__condition.wait()
         self.__responseLock.acquire()
         ret = copy(self.response)
@@ -54,21 +55,22 @@ class ProcessHandler:
 
     #@return int representing PowerPlant to begin bidding on
     def requestAuctionStart(self):
-        return __generateRequest(ServerRequestTypes.AuctionStart)
+        return self.__generateRequest(ServerRequestTypes.AUCTION_START)
 
+    #@param player - player that currently has highest bid
     #@return int representing Price player bid
-    def requestBid(self, powerPlant, minBid):
-        return __generateRequest(ServerRequestTypes.PowerPlantBid,
-                                 args=[powerPlant.toString(), str(minBid)])
+    def requestBid(self, powerPlant, minBid, player):
+        return self.__generateRequest(ServerRequestTypes.POWER_PLANT_BID,
+                                 args=[powerPlant.toString(), str(minBid), str(player)])
 
     def requestMaterialPurchase(self):
-        return __generateRequest(ServerRequestTypes.ResourcePurchase)
+        return self.__generateRequest(ServerRequestTypes.RESOURCE_PURCHASE)
 
     def requestCityPurchase(self):
-        return __generateRequest(ServerRequestTypes.CityPurchase)
+        return self.__generateRequest(ServerRequestTypes.CITY_PURCHASE)
 
     def requestSupplyPowerForCities(self):
-        return __generateRequest(ServerRequestTypes.SupplyPowerForCities)
+        return self.__generateRequest(ServerRequestTypes.SUPPLY_POWER_FOR_CITIES)
 
     def getRequestType(self, requestId):
         return self.requests[requestId]
