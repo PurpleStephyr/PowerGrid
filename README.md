@@ -1,8 +1,8 @@
 PowerGrid
 =========
-Copyright Steph Kraemer <straemer@gmail.com> 2013
+Copyright Steph Kraemer <purple.stephyr@fmgirl.com> 2013
 
-Source Available at https://github.com/straemer/PowerGrid
+Source Available at https://github.com/PurpleStephyr/PowerGrid
 
 This program is based off of the board game, Power Grid. More information on the game can be found here: http://www.boardgamegeek.com/boardgame/2651/power-grid
 
